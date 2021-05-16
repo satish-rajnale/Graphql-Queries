@@ -20,7 +20,7 @@ var query = `query  {
 
 const myData = []
 
-fetch('http://localhost:8000/graphql', {
+fetch('https://graphql-queries-rctz4pwuw-satish-rajnale.vercel.app/graphql', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
