@@ -11,6 +11,7 @@ const {
   GraphQLInt,
   GraphQLNonNull,
   GraphQLID,
+  buildSchema,
   GraphQLFloat,
 } = require("graphql");
 
@@ -48,6 +49,11 @@ const {
     },
   }),
 });
+
+
+// const newSchema = new buildSchema({
+  
+// })
 
  const schema = new GraphQLSchema({
   query: RootQueryType,
