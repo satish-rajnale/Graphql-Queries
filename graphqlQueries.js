@@ -1,3 +1,8 @@
+
+
+
+
+///************for Books in books.js */
 // adding a book
 mutation {
     addBook (bookName:"Lulab", authorId:2){
@@ -17,6 +22,9 @@ query{
     books{
       id
       bookName
+      author{
+        name
+      }
     }
   }
 // to get a list of authors

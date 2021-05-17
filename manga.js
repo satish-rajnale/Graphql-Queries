@@ -15,15 +15,25 @@ const {
   GraphQLFloat,
 } = require("graphql");
 
+
+
+
  const MangaType = new GraphQLObjectType({
   name: "MangaType",
   description: "manga type",
   fields: () => ({
-    mal_id: { type: GraphQLID },
-    rank: { type: GraphQLNonNull(GraphQLInt) },
-    url: { type: GraphQLNonNull(GraphQLString) },
-    score: { type: GraphQLNonNull(GraphQLFloat) },
     title: { type: GraphQLNonNull(GraphQLString) },
+    score: { type: GraphQLNonNull(GraphQLFloat) },
+    type: { type: GraphQLNonNull(GraphQLString) },
+    rank: { type: GraphQLNonNull(GraphQLInt) },
+    mal_id: { type: GraphQLID },
+    
+    start_date:{ type: GraphQLNonNull(GraphQLString) },
+    members:{ type: GraphQLInt },
+    url: { type: GraphQLString },
+    image_url: { type: GraphQLString },
+   
+   
   }),
 });
 
@@ -47,6 +57,7 @@ const {
         return data["top"].filter((manga) => Math.floor(manga.score) === args.score);
       },
     },
+   
   }),
 });
 

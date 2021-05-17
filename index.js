@@ -12,9 +12,19 @@ var score = 9;
 
 var query = `query  {
     searchByScore(score: ${score}){
-        mal_id
-        title
-        score
+      title
+      type
+      score
+      rank
+       mal_id
+     
+     
+      start_date
+      members
+      url
+      image_url
+    
+     
     }
 }`;
 
@@ -59,7 +69,7 @@ async function getData() {
     .then(response => response.data)
     .then((v) => {
       myData.push(v.data.searchByScore);
-      console.log("data returned:", myData);
+      console.log("data returned:", myData[0]);
     })
     .catch(function (error) {
       console.log(error);
