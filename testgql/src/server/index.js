@@ -12,13 +12,23 @@ const USERS = [
 const schema = buildASTSchema(gql`
   type Query {
     users: [User]
-    user(id: ID!): User
+    user(id: Int!): User
   }
 
   type User {
-    id: ID
+    id: Int!
     name: String
     plays: String
+  }
+
+  type Mutation {
+    submitUser(input: UserInput!): User
+  }
+  
+  input UserInput {
+    id: Int!
+    name: String!
+    plays: String!
   }
 `);
 
@@ -27,6 +37,21 @@ const mapUser = (user, id) => user && ({ id, ...user });
 const root = {
   users: () => USERS.map(mapUser),
   user: ({ id }) => mapUser(USERS[id], id),
+  submitUser: ({ input: { id, name, plays } }) => {
+    const post = { name, plays };
+    let index = USERS.length;
+  
+    if (id != null && id >= 0 && id < USERS.length) {
+      if (USERS[id].nameId !== nameId) return null;
+  
+      USERS.splice(id, 1, user);
+      index = id;
+    } else {
+      USERS.push(user);
+    }
+  
+    return mapUser(user, index);
+  },
 };
 
 const app = express();
