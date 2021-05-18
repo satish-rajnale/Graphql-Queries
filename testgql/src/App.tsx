@@ -1,7 +1,32 @@
 import React, { useEffect, useState } from "react";
-
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+  from,
+} from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import "./App.css";
 import axios from "axios";
+
+const errorLink = onError(({ graphqlErrors, networkError }) => {
+  if (graphqlErrors) {
+    graphqlErrors.map(({ message, location, path }) => {
+      alert(`Graphql eror ${message}`);
+    });
+  }
+});
+
+const link = from([
+  errorLink,
+  new HttpLink({ uri: "http://localhost:3000/graphql" }),
+]);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: link,
+});
 
 var score = 9;
 
@@ -48,8 +73,8 @@ function App() {
   return (
     <div className="App">
       {data.map((item) => (
-        <div key={item. mal_id} className="card">
-        <img src={item.image_url}/>
+        <div key={item.mal_id} className="card">
+          <img src={item.image_url} />
           <h5>{item.title}</h5>
         </div>
       ))}
