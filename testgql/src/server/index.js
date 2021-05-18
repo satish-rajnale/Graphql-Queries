@@ -1,32 +1,32 @@
 const express = require('express');
 const cors = require('cors');
-const graphqlHTTP = require('express-graphql');
+const graphqlHTTP = require("express-graphql").graphqlHTTP;
 const gql = require('graphql-tag');
 const { buildASTSchema } = require('graphql');
 
-const POSTS = [
-  { author: "John Doe", body: "Hello world" },
-  { author: "Jane Doe", body: "Hi, planet!" },
+const USERS = [
+  { name: "John Doe", plays: "Hello world" },
+  { name: "Jane Doe", plays: "Hi, planet!" },
 ];
 
 const schema = buildASTSchema(gql`
   type Query {
-    posts: [Post]
-    post(id: ID!): Post
+    users: [User]
+    user(id: ID!): User
   }
 
-  type Post {
+  type User {
     id: ID
-    author: String
-    body: String
+    name: String
+    plays: String
   }
 `);
 
-const mapPost = (post, id) => post && ({ id, ...post });
+const mapUser = (user, id) => user && ({ id, ...user });
 
 const root = {
-  posts: () => POSTS.map(mapPost),
-  post: ({ id }) => mapPost(POSTS[id], id),
+  users: () => USERS.map(mapUser),
+  user: ({ id }) => mapUser(USERS[id], id),
 };
 
 const app = express();
@@ -39,4 +39,4 @@ app.use('/graphql', graphqlHTTP({
 
 const port = process.env.PORT || 4000
 app.listen(port);
-console.log(`Running a GraphQL API server at localhost:${port}/graphql`);
+console.log(`Running a GraphQL API server at http://localhost:${port}/graphql`);

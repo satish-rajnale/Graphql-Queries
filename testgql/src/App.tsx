@@ -22,10 +22,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const link = from([
   errorLink,
-  new HttpLink({ uri: "http://localhost:3000/graphql" }),
+  new HttpLink({ uri: "http://localhost:4000/graphql" }),
 ]);
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: link,
 });
@@ -49,28 +49,30 @@ var query = `query  {
 function App() {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios({
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": true,
-        crossdomain: true,
-      },
-      url: "http://localhost:8000/graphql",
-      data: {
-        query,
-      },
-    })
-      .then((response) => response.data)
-      .then((v) => {
-        setData(v.data.searchByScore);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-  console.log("data returned:", data);
+
+  // this is for mangalist outside of this project
+  // useEffect(() => {
+  //   axios({
+  //     method: "post",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Access-Control-Allow-Origin": true,
+  //       crossdomain: true,
+  //     },
+  //     url: "http://localhost:8000/graphql",
+  //     data: {
+  //       query,
+  //     },
+  //   })
+  //     .then((response) => response.data)
+  //     .then((v) => {
+  //       setData(v.data.searchByScore);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, []);
+  // console.log("data returned:", data);
 
   return (
      <ApolloProvider client={client}>
