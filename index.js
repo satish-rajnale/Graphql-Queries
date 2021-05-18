@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
+var cors = require('cors')
 
+
+app.use(cors())
 app.use(express.json());
 const expressGraphQl = require("express-graphql").graphqlHTTP;
 const schema = require("./manga").schema;
@@ -61,6 +64,7 @@ const myQuery = JSON.stringify(query);
 async function getData() {
   await axios({
     method: "post",
+    headers: { 'Content-Type': 'application/json', "crossdomain": true  },
     url: " http://localhost:8000/graphql",
     data: {
       query,
@@ -86,8 +90,8 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.status(200).send(JSON.stringify(myData));
+app.get("/mangalist", (req, res) => {
+  res.status(200).send(JSON.stringify(myData[0]));
 });
 
 const port = process.env.port || 8000;
