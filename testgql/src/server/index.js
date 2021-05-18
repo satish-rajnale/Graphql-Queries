@@ -5,18 +5,18 @@ const gql = require('graphql-tag');
 const { buildASTSchema } = require('graphql');
 
 const USERS = [
-  { id:1,name: "John Doe", plays: "Hello world" },
-  { id:2,name: "Jane Doe", plays: "Hi, planet!" },
+  { name: "John Doe", plays: "Hello world" },
+  { name: "Jane Doe", plays: "Hi, planet!" },
 ];
 
 const schema = buildASTSchema(gql`
   type Query {
     users: [User]
-    user(id: Int!): User
+    user(id: ID!): User
   }
 
   type User {
-    id: Int!
+    id: ID
     name: String
     plays: String
   }
@@ -26,7 +26,7 @@ const schema = buildASTSchema(gql`
   }
   
   input UserInput {
-    id: Int!
+    id: ID
     name: String!
     plays: String!
   }
@@ -38,7 +38,7 @@ const root = {
   users: () => USERS.map(mapUser),
   user: ({ id }) => mapUser(USERS[id], id),
   submitUser: ({ input: { id, name, plays } }) => {
-    const post = { name, plays };
+    const user = { name, plays };
     let index = USERS.length;
   
     if (id != null && id >= 0 && id < USERS.length) {

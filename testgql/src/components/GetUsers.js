@@ -1,51 +1,61 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { LOAD_USERS, GET_USER } from "../GRAPHQL/Query";
 
 function GetUsers() {
 //   const { error, loading, data } = useQuery(LOAD_USERS);
-  const { userLoad } = useQuery(GET_USER);
+  const { error, loading, data } = useQuery(GET_USER);
   const [users, setUsers] = useState([]);
-    const myref = useRef(null)
+  const [id, setId] = useState(0);
+
+
+
 
   useEffect(() => {
-      if(myref.current.value !== null ){
-        let id = myref.current.value;
-        console.log(myref.current.value);
-        setUsers(userLoad)
-        
-      }
-
     // if (!loading) {
     //   setUsers(data.users);
     //   console.log(data.users);
     // }
-  }, [myref.current?.value]);
-  
+    if (!loading) {
+    setUsers(data.user);
+    console.log(users)
+    console.log( typeof users == "object")
+    console.log(data)
+    }
+  }, [data]);
+
   function submitForm(e){
     e.preventDefault();
-    
-    console.log(myref.current.value);
+    setId(e.target.value);
+    console.log(id)
    }
-   console.log(users);
+   function setter(e){
+    e.preventDefault();
+    setUsers(data);
+    console.log(users)
+    console.log(data)
+   }
   return (
     <div>
-       <form onSubmit={submitForm}>
-   <input type="text" ref={myref} />
-   <button>Submit</button>
+        <form >
+   <input onChange={submitForm} type="text"/>
+   <button onClick={setter}>Submit</button>
   </form>
 
       <ul>
-        {/* {loading ? (
+        {loading ? (
           <h1>Loading...</h1>
-        ) : (
+        ) : ( typeof users == "object"? ( <li>
+            <h2>{users.name}</h2>
+            <p>{users.plays}</p>
+          </li>):
           users.map((user) => (
             <li>
               <h2>{user.name}</h2>
               <p>{user.plays}</p>
             </li>
           ))
-        )} */}
+        )}
       </ul>
     </div>
   );
