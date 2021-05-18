@@ -9,10 +9,12 @@ import {
 import { onError } from "@apollo/client/link/error";
 import "./App.css";
 import axios from "axios";
+import GetUsers from "./components/GetUsers";
 
-const errorLink = onError(({ graphqlErrors, networkError }) => {
-  if (graphqlErrors) {
-    graphqlErrors.map(({ message, location, path }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+                              /* @ts-ignore */ 
+    graphQLErrors.map(({ message, location, path }) => {
       alert(`Graphql eror ${message}`);
     });
   }
@@ -71,14 +73,17 @@ function App() {
   console.log("data returned:", data);
 
   return (
-    <div className="App">
+     <ApolloProvider client={client}>
+    {/* <div className="App">
       {data.map((item) => (
         <div key={item.mal_id} className="card">
           <img src={item.image_url} />
           <h5>{item.title}</h5>
         </div>
       ))}
-    </div>
+    </div> */}
+    <GetUsers/>
+    </ApolloProvider>
   );
 }
 
