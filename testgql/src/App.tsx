@@ -1,55 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import axios from "axios"
-import { AnyARecord } from 'dns';
+import React, { useEffect, useState } from "react";
 
+import "./App.css";
+import axios from "axios";
 
+var score = 9;
 
-
-// var score = 9;
-
-// var query = `query  {
-//     searchByScore(score: ${score}){
-//         mal_id
-//         title
-//         score
-//     }
-// }`;
-
-
-
-
-
-
+var query = `query  {
+  searchByScore(score: ${score}){
+    title
+    type
+    score
+    rank
+    mal_id
+    start_date
+    members
+    url
+    image_url
+  }
+}`;
 
 function App() {
-const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-useEffect(()=>{
-   axios({
-      method: "get",
-      headers: { 'Content-Type': 'application/json',"Access-Control-Allow-Origin": true },
-      url: " http://localhost:8000/mangalist",
+  useEffect(() => {
+    axios({
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": true,
+        crossdomain: true,
+      },
+      url: "http://localhost:8000/graphql",
+      data: {
+        query,
+      },
     })
-      .then(response => response)
+      .then((response) => response.data)
       .then((v) => {
-       setData(v.data);
-       
+        setData(v.data.searchByScore);
       })
       .catch(function (error) {
         console.log(error);
       });
-  
-  
-}, [])
-console.log("data returned:", data);
+  }, []);
+  console.log("data returned:", data);
 
   return (
     <div className="App">
-     {data.map(item => (
-       <h3>{item.title}</h3>
-     ))}
+      {data.map((item) => (
+        <div key={item. mal_id} className="card">
+        <img src={item.image_url}/>
+          <h5>{item.title}</h5>
+        </div>
+      ))}
     </div>
   );
 }
