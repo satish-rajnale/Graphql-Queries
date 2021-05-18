@@ -1,21 +1,21 @@
-import {gql} from "@apollo/client"
+import { gql } from "@apollo/client";
 
 export const LOAD_USERS = gql`
-query {
+  query {
     users {
-        id 
-        name
-        plays
+      id
+      name
+      plays
     }
-}
-`
+  }
+`;
 
 export const GET_USER = gql`
-query {
-    user(id :1) {
-        id 
-        name
-        plays
+  query {
+    user(id: 1) {
+      id
+      name
+      plays
     }
-}
-`
+  }
+`;
