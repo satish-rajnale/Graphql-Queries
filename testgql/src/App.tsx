@@ -75,7 +75,7 @@ function App() {
   // console.log("data returned:", data);
 
   return (
-     <ApolloProvider client={client}>
+    <>
     {/* <div className="App">
       {data.map((item) => (
         <div key={item.mal_id} className="card">
@@ -85,7 +85,7 @@ function App() {
       ))}
     </div> */}
     <GetUsers/>
-    </ApolloProvider>
+  </>
   );
 }
 

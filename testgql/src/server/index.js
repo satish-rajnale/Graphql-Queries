@@ -5,8 +5,8 @@ const gql = require('graphql-tag');
 const { buildASTSchema } = require('graphql');
 
 const USERS = [
-  { name: "John Doe", plays: "Hello world" },
-  { name: "Jane Doe", plays: "Hi, planet!" },
+  { id:1,name: "John Doe", plays: "Hello world" },
+  { id:2,name: "Jane Doe", plays: "Hi, planet!" },
 ];
 
 const schema = buildASTSchema(gql`

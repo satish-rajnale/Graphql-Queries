@@ -5,6 +5,7 @@ query {
     users {
         id 
         name
+        plays
     }
 }
 `
