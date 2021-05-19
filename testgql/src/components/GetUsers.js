@@ -3,7 +3,11 @@ import { useQuery, gql } from "@apollo/client";
 import { LOAD_USERS, GET_USER } from "../GRAPHQL/Query";
 
 function GetUsers() {
-    const { error:error1, loading: loading1, data:data1 } = useQuery(LOAD_USERS);
+  const {
+    error: error1,
+    loading: loading1,
+    data: data1,
+  } = useQuery(LOAD_USERS); // used this because at a time there can only be one variable named data destructured though we have here two queries that destructure data 
   const { error, loading, data } = useQuery(GET_USER);
   const [users, setUsers] = useState([]);
   const [isarray, setIsarray] = useState(false);
@@ -21,9 +25,8 @@ function GetUsers() {
     }
   }, [data, isarray]);
 
-  
   function setter(e) {
-    setIsarray(!isarray)
+    setIsarray(!isarray);
     setUsers(data1.users);
     console.log(users);
     console.log(isarray);
@@ -31,26 +34,24 @@ function GetUsers() {
   }
   return (
     <div>
-     
-        <button onClick={setter}>Submit</button>
-     
+      <button onClick={setter}>Submit</button>
 
       <ul>
         {loading ? (
           <h1>Loading...</h1>
-        ) : (isarray ? 
+        ) : isarray ? (
           users.map((user) => (
             <li>
               <h2>{user.name}</h2>
               <p>{user.plays}</p>
             </li>
           ))
-      :  
+        ) : (
           <li>
             <h2>{users.name}</h2>
             <p>{users.plays}</p>
           </li>
-         )}
+        )}
       </ul>
     </div>
   );

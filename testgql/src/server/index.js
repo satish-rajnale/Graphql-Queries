@@ -49,14 +49,14 @@ const root = {
     } else {
       USERS.push(user);
     }
- 
+
     return mapUser(user, index);
   },
 };
 
 const app = express();
 app.use(cors());
-app.use( 
+app.use(
   "/graphql",
   graphqlHTTP({
     schema,
