@@ -7,7 +7,7 @@ const { buildASTSchema } = require("graphql");
 const USERS = [
   { name: "John Doe", plays: "Hello world" },
   { name: "Jane Doe", plays: "Hi, planet!" },
-];
+];  
 
 const schema = buildASTSchema(gql`
   type Query {
