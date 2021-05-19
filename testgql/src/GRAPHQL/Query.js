@@ -12,7 +12,7 @@ export const LOAD_USERS = gql`
 
 export const GET_USER = gql`
   query {
-    user(id: 4) {
+    user(id: 1) {
       id
       name
       plays
