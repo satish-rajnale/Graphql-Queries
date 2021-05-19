@@ -10,6 +10,7 @@ import { onError } from "@apollo/client/link/error";
 import "./App.css";
 import axios from "axios";
 import GetUsers from "./components/GetUsers";
+import AddUser from "./components/AddUser";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -85,6 +86,7 @@ function App() {
       ))}
     </div> */}
     <GetUsers/>
+    <AddUser/>
   </>
   );
 }

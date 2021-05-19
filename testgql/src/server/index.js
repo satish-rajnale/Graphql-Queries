@@ -22,10 +22,10 @@ const schema = buildASTSchema(gql`
   }
 
   type Mutation {
-    submitUser(input: UserInput!): User
+    createUser(input: createUser!): User
   }
 
-  input UserInput {
+  input createUser {
     id: ID
     name: String!
     plays: String!
@@ -37,7 +37,7 @@ const mapUser = (user, id) => user && { id, ...user };
 const root = {
   users: () => USERS.map(mapUser),
   user: ({ id }) => mapUser(USERS[id], id),
-  submitUser: ({ input: { id, name, plays } }) => {
+  createUser: ({ input: { id, name, plays } }) => {
     const user = { name, plays };
     let index = USERS.length;
 
@@ -49,7 +49,7 @@ const root = {
     } else {
       USERS.push(user);
     }
-
+ 
     return mapUser(user, index);
   },
 };

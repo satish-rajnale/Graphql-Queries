@@ -3,7 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import { LOAD_USERS, GET_USER } from "../GRAPHQL/Query";
 
 function GetUsers() {
-  //   const { error, loading, data } = useQuery(LOAD_USERS);
+    const { error:error1, loading: loading1, data:data1 } = useQuery(LOAD_USERS);
   const { error, loading, data } = useQuery(GET_USER);
   const [users, setUsers] = useState([]);
   const [id, setId] = useState(0);
@@ -14,30 +14,25 @@ function GetUsers() {
     //   console.log(data.users);
     // }
     if (!loading) {
-      setUsers(data.user);
+      setUsers(data);
       console.log(users);
-      console.log(typeof users == "object");
+      console.log(Array.isArray(users));
       console.log(data);
     }
   }, [data]);
 
-  function submitForm(e) {
-    e.preventDefault();
-    setId(e.target.value);
-    console.log(id);
-  }
+  
   function setter(e) {
-    e.preventDefault();
-    setUsers(data);
+   
+    setUsers(data1.users);
     console.log(users);
-    console.log(data);
+    console.log(data1.users);
   }
   return (
     <div>
-      <form>
-        <input onChange={submitForm} type="text" />
+     
         <button onClick={setter}>Submit</button>
-      </form>
+     
 
       <ul>
         {loading ? (
