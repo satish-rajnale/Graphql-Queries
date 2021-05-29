@@ -9,3 +9,4 @@ i.e unlike in rest-api where for user data you make one api call and for posts y
 
 Also you have to have different endpoints defined to serve those call requests.
 
+Graphql minimizes the call requests efficiently, depends on how well you have defined your schema and resolvers
