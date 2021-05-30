@@ -12,3 +12,4 @@ Also you have to have different endpoints defined to serve those call requests.
 Graphql minimizes the call requests efficiently, depends on how well you have defined your schema and resolvers
 
 The only drawback to a graphql api over a rest api would be it does not provide a status value.
+while rest api calls provide a status with each response so deceloper can decide how to handle that response with the status it reported. 
