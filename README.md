@@ -13,3 +13,5 @@ Graphql minimizes the call requests efficiently, depends on how well you have de
 
 The only drawback to a graphql api over a rest api would be it does not provide a status value.
 while rest api calls provide a status with each response so deceloper can decide how to handle that response with the status it reported. 
+
+Graphql is best used with rapidly changing data.
