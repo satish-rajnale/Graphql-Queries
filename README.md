@@ -18,4 +18,4 @@ Graphql is best used with rapidly changing data.
 
 Every Graphql query should have a predefined schema and a resolver for it.
  - A schema has the structure for your data that will be fetched through graphql api.
- - A resolver contains the returned data when received a query.
+ - A resolver contains the returned data when received a query. You can also add functions to filter or perform action on the data based on user query before it is passed to the user through response.
