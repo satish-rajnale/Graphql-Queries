@@ -16,5 +16,6 @@ while rest api calls provide a status with each response so deceloper can decide
 
 Graphql is best used with rapidly changing data.
 
-Every Graphql query should have a predefined schema and a resolver for it
+Every Graphql query should have a predefined schema and a resolver for it.
+ - A schema has the structure for your data that will be fetched through graphql api.
 
