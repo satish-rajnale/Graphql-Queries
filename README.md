@@ -22,3 +22,5 @@ Every Graphql query should have a predefined schema and a resolver for it.
 
 You can connect your frontend if using react through apollo-client which is the most used package for connecting graphql api and your react-app.
 > Note : Make sure every request to gql api is of type string.
+
+The graphql returns a response with a data object that has your requested data as a object named by defined query.
