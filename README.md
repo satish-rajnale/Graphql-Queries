@@ -24,3 +24,5 @@ You can connect your frontend if using react through apollo-client which is the 
 > Note : Make sure every request to gql api is of type string.
 
 The graphql returns a response with a data object that has your requested data as a object named by defined query.
+
+Graphql provides a easy looking interface to create, test and analyze the api.
