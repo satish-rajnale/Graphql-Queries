@@ -27,3 +27,8 @@ The graphql returns a response with a data object that has your requested data a
 
 Graphql provides a easy looking interface to create, test and analyze the api.
 As you dont need to create different api calls to get data graphql provides a easy interface to test api calls and check its return data.
+
+```js
+
+var graphql = require("graphql");
+```
