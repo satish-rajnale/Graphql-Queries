@@ -31,7 +31,7 @@ As you dont need to create different api calls to get data graphql provides a ea
 ```js
 
 var graphql = require("graphql");
-
+const userdata ={name : 'satish', age : 22 };
 const rootQuery = GRAPHQLQUERYOBJECT({
 
     name : "myquery",
