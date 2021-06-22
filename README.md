@@ -35,6 +35,10 @@ const userdata ={name : 'satish', age : 22 };
 const rootQuery = GRAPHQLQUERYOBJECT({
 
     name : "myquery",
+    type : {
+      "name": String,
+      "age": Number
+    },
     resolver: () => {
        return userdata;
 }
