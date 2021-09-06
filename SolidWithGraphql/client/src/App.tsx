@@ -22,10 +22,20 @@ const [todos, {refetch}] = createResource(() =>
 const App: Component = () => {
   const [text, setText] = createSignal("");
 
+  const toggle = async (id) => {
+    await client.mutation(`
+      mutation($id: ID!, $done: Boolean!) {
+        setDone(id: $id, done: $done){
+          id
+        }
+      }`,{ id, done: !todos().find((todo) => todo.id == id).done}
+      )
+      .toPromise();
+  }
   const onAdd = async () => {
     await client.mutation(`
       mutation($text: String!) {
-        addTodo: (text: $text){
+        addTodo(text: $text){
           id
         }
       }`,{ text: text() }
@@ -38,13 +48,13 @@ const App: Component = () => {
     <div >
       <For each={todos()}>
         {({id, done, text}) => <div>
-            <input type="checkbox" checked={done}/>
+            <input type="checkbox" checked={done} onclick={() => toggle(id)}/>
             <span>{text}</span>
           </div>}
       </For>
       <div>
         <input type="text" value={text()} oninput={(e)=> setText(e.currentTarget.value)}/>
-        <button onclick={onAdd} value="Add"/>
+        <button onclick={onAdd} >ADD</button>
       </div>
     </div>
   );
